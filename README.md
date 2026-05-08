@@ -42,6 +42,9 @@ src/
 		core/
 			config.ts
 			errors.ts
+		infrastructure/
+			persistence/
+				database.ts
 	modules/
 		health/
 			http/
@@ -57,6 +60,7 @@ src/
 				todo.routes.ts
 			infrastructure/
 				in-memory-todo.repository.ts
+				postgres-todo.repository.ts
 			todo.module.ts
 ```
 
@@ -66,6 +70,36 @@ src/
 - `shared` contains cross-cutting concerns such as config and error handling.
 - `modules` groups each feature vertically.
 - Each module separates `domain`, `application`, `infrastructure`, and `http` responsibilities.
+
+## Replacing In-Memory Persistence
+
+The Todo module uses in-memory storage by default as a practical example.
+For production usage, swap the adapter with a real database implementation.
+
+### Recommended steps
+
+1. Add a database URL to your environment:
+
+```env
+DB_URL=postgres://user:password@localhost:5432/app_db
+```
+
+2. Validate `DB_URL` in `shared/core/config.ts`.
+3. Add a shared database client in `shared/infrastructure/persistence/database.ts`.
+4. Implement a real adapter (for example `postgres-todo.repository.ts`) that satisfies `TodoRepository`.
+5. Update `modules/todo/todo.module.ts` to inject the real repository into `TodoService`.
+
+### Wiring example
+
+```ts
+// Before
+const todoRepository = new InMemoryTodoRepository();
+
+// After
+const todoRepository = new PostgresTodoRepository(dbClient);
+```
+
+This keeps the application layer unchanged and replaces only the infrastructure adapter.
 
 ## Getting Started
 
@@ -170,3 +204,4 @@ OpenAPI server URL is generated using the current `PORT` value.
 - The app uses ESM (`"type": "module"`).
 - TypeScript output is generated to `dist`.
 - Todo storage is in-memory and intended for starter/development usage.
+- Replacing persistence only requires a new repository adapter + module wiring update.
