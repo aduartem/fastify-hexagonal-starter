@@ -1,0 +1,18 @@
+# Dependencias
+node_modules/
+
+# Compilación
+dist/
+*.tsbuildinfo
+
+# Logs y SO
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Entorno
+.env
+.env.local
+
+.vscode/
+.idea/
