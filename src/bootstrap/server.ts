@@ -8,6 +8,13 @@ import { InMemoryTodoRepository } from '../modules/todo/infrastructure/in-memory
 import { healthRoutes } from '../modules/health/http/health.routes.js';
 import { todoRoutes } from '../modules/todo/http/todo.routes.js';
 
+const apiInfo = {
+  title: 'Fastify Hexagonal Starter',
+  description:
+    'Opinionated TypeScript Fastify starter with Hexagonal Architecture, Vertical Slicing, Zod validation, Swagger, and integration tests.',
+  version: '1.0.0',
+};
+
 export async function buildServer() {
   const server = fastify({
     logger: {
@@ -26,11 +33,7 @@ export async function buildServer() {
 
   await server.register(swagger, {
     openapi: {
-      info: {
-        title: 'TS Pure API',
-        description: 'Pure TypeScript Node.js 24 boilerplate',
-        version: '1.0.0',
-      },
+      info: apiInfo,
       servers: [{ url: `http://localhost:${env.PORT}` }],
     },
   });
