@@ -53,10 +53,11 @@ src/
 				todo.service.ts
 			domain/
 				todo.entity.ts
-			infrastructure/
-				in-memory-todo.repository.ts
 			http/
 				todo.routes.ts
+			infrastructure/
+				in-memory-todo.repository.ts
+			todo.module.ts
 ```
 
 ## Architecture Notes

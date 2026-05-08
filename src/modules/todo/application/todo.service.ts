@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { AppError } from '../../../shared/core/errors.js';
-import { createTodo, type Todo } from '../domain/todo.entity.js';
-import type { TodoRepository } from './ports/todo.repository.js';
+import type { TodoRepository } from '@modules/todo/application/ports/todo.repository.js';
+import { createTodo, type Todo } from '@modules/todo/domain/todo.entity.js';
+import { AppError } from '@shared/core/errors.js';
 
 const createTodoSchema = z.object({
   title: z.string().trim().min(1).max(120),

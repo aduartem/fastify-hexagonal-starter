@@ -1,5 +1,5 @@
-import { patchTodo, type Todo, type TodoPatch } from '../domain/todo.entity.js';
-import type { TodoRepository } from '../application/ports/todo.repository.js';
+import type { TodoRepository } from '@modules/todo/application/ports/todo.repository.js';
+import { patchTodo, type Todo, type TodoPatch } from '@modules/todo/domain/todo.entity.js';
 
 export class InMemoryTodoRepository implements TodoRepository {
   private readonly todos: Todo[] = [];

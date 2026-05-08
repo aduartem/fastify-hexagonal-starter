@@ -1,5 +1,5 @@
-import { env } from '../shared/core/config.js';
-import { buildServer } from './server.js';
+import { buildServer } from '@bootstrap/server.js';
+import { env } from '@shared/core/config.js';
 
 const server = await buildServer();
 

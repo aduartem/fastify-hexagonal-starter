@@ -1,5 +1,5 @@
 import type { FastifyInstance } from 'fastify';
-import type { TodoService } from '../application/todo.service.js';
+import type { TodoService } from '@modules/todo/application/todo.service.js';
 
 type TodoRoutesOptions = {
   todoService: TodoService;

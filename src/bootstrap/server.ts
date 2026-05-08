@@ -1,12 +1,11 @@
 import fastify from 'fastify';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
-import { TodoService } from '../modules/todo/application/todo.service.js';
-import { env } from '../shared/core/config.js';
-import { AppError, buildErrorResponse } from '../shared/core/errors.js';
-import { InMemoryTodoRepository } from '../modules/todo/infrastructure/in-memory-todo.repository.js';
-import { healthRoutes } from '../modules/health/http/health.routes.js';
-import { todoRoutes } from '../modules/todo/http/todo.routes.js';
+import { healthRoutes } from '@modules/health/http/health.routes.js';
+import { todoRoutes } from '@modules/todo/http/todo.routes.js';
+import { buildTodoDependencies } from '@modules/todo/todo.module.js';
+import { env } from '@shared/core/config.js';
+import { AppError, buildErrorResponse } from '@shared/core/errors.js';
 
 const apiInfo = {
   title: 'Fastify Hexagonal Starter',
@@ -28,9 +27,6 @@ export async function buildServer() {
     },
   });
 
-  const todoRepository = new InMemoryTodoRepository();
-  const todoService = new TodoService(todoRepository);
-
   await server.register(swagger, {
     openapi: {
       info: apiInfo,
@@ -41,6 +37,8 @@ export async function buildServer() {
   await server.register(swaggerUi, {
     routePrefix: '/docs',
   });
+
+  const { todoService } = buildTodoDependencies();
 
   server.register(healthRoutes, { prefix: '/api/v1' });
   server.register(todoRoutes, {

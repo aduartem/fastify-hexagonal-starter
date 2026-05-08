@@ -1,1 +1,1 @@
-import './bootstrap/index.js';
+import '@bootstrap/index.js';

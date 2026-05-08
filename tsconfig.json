@@ -28,17 +28,14 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "@core/*": [
-        "./src/core/*"
+      "@bootstrap/*": [
+        "./src/bootstrap/*"
       ],
-      "@infra/*": [
-        "./src/infrastructure/*"
+      "@shared/*": [
+        "./src/shared/*"
       ],
-      "@domain/*": [
-        "./src/domain/*"
-      ],
-      "@app/*": [
-        "./src/application/*"
+      "@modules/*": [
+        "./src/modules/*"
       ]
     }
   },

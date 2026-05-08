@@ -1,4 +1,4 @@
-import type { Todo, TodoPatch } from '../../domain/todo.entity.js';
+import type { Todo, TodoPatch } from '@modules/todo/domain/todo.entity.js';
 
 export interface TodoRepository {
   create(todo: Todo): Promise<Todo>;
